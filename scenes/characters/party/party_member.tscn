@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://mafga1c4erqh"]
+
+[ext_resource type="Script" uid="uid://bg8yo50ylmraj" path="res://scripts/characters/party_member.gd" id="1_h0pfg"]
+
+[node name="PartyMember" type="Node2D"]
+script = ExtResource("1_h0pfg")
+role = 1
+character_name = "힐러"
+max_hp = 80
+max_mp = 100

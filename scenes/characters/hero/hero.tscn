@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cds3c3mtgvrkk"]
+
+[ext_resource type="Script" uid="uid://do0cqx3wvruov" path="res://scripts/characters/hero.gd" id="1_uiqod"]
+
+[node name="Hero" type="Node2D"]
+script = ExtResource("1_uiqod")
+character_name = "Hero"
+max_hp = 150
+max_mp = 80
+speed = 12
