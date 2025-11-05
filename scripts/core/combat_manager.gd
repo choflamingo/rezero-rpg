@@ -6,6 +6,7 @@ extends Node
 # 자식 노드 참조
 # ========================================
 @onready var turn_system = $TurnSystem  # 턴 시스템
+@onready var battle_hud = get_node("../BattleHUD") #HUD 연결
 
 # ========================================
 # 전투 상태
@@ -29,6 +30,7 @@ var enemies: Array = []   # 적
 # ========================================
 # 전투 시작
 # ========================================
+
 func start_battle():
 	print("\n========================================")
 	print("         전투 시작!")
@@ -39,9 +41,15 @@ func start_battle():
 	# 캐릭터 수집
 	collect_characters()
 	
-	# 턴 시스템 초기화
+	# HUD 초기화 (새로 추가!)
 	var all_characters = allies + enemies
+	battle_hud.setup_characters(all_characters)
+	
+	# 턴 시스템 초기화
 	turn_system.initialize(all_characters)
+	
+	# 턴 순서 HUD 업데이트 (새로 추가!)
+	battle_hud.update_turn_order(turn_system.turn_order)
 	
 	# 첫 턴 시작
 	current_state = BattleState.TURN
@@ -89,7 +97,6 @@ func on_character_action(actor, action_type: String, target):
 # 공격 실행
 # ========================================
 func execute_attack(attacker, target):
-	# 대상이 없으면 자동 선택
 	if target == null:
 		target = select_auto_target(attacker)
 	
@@ -100,7 +107,9 @@ func execute_attack(attacker, target):
 	# 데미지 계산 및 적용
 	var damage = attacker.do_attack(target)
 	
-	# 시각 효과 (나중에 추가)
+	# UI 업데이트 (새로 추가!)
+	battle_hud.update_character_stats(target)
+	
 	await get_tree().create_timer(0.2).timeout
 
 # ========================================

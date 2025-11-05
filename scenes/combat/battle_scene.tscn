@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bv1tk56w673in"]
+[gd_scene load_steps=7 format=3 uid="uid://bv1tk56w673in"]
 
 [ext_resource type="Script" uid="uid://bgu14wi4qkl71" path="res://scripts/core/combat_manager.gd" id="1_7rehl"]
 [ext_resource type="Script" uid="uid://31ca7e5xn06a" path="res://scripts/core/turn_system.gd" id="2_1m7uk"]
 [ext_resource type="PackedScene" uid="uid://cds3c3mtgvrkk" path="res://scenes/characters/hero/hero.tscn" id="3_yicj5"]
 [ext_resource type="PackedScene" uid="uid://mafga1c4erqh" path="res://scenes/characters/party/party_member.tscn" id="4_y2qs5"]
 [ext_resource type="PackedScene" uid="uid://dq1ftrgn4dh2r" path="res://scenes/characters/enemy/enemy.tscn" id="5_yuqur"]
+[ext_resource type="PackedScene" uid="uid://vi7e7577qvt" path="res://scenes/ui/battle_hud.tscn" id="6_1m7uk"]
 
 [node name="BattleScene" type="Node2D"]
 
@@ -29,3 +30,5 @@ position = Vector2(300, 360)
 
 [node name="Enemy" parent="Enemies" groups=["enemies"] instance=ExtResource("5_yuqur")]
 position = Vector2(1000, 360)
+
+[node name="BattleHUD" parent="." groups=["battle_hud"] instance=ExtResource("6_1m7uk")]

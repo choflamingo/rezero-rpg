@@ -60,8 +60,6 @@ func next_turn():
 	if current_turn_index >= turn_order.size():
 		current_turn_index = 0
 		print("\n=== 새 라운드 시작 ===\n")
-		
-		# 죽은 캐릭터 제외하고 재계산
 		recalculate_if_needed()
 	
 	# 현재 캐릭터 가져오기
@@ -71,8 +69,13 @@ func next_turn():
 		# 죽은 캐릭터면 스킵
 		if not current_character.is_alive:
 			print("%s는 쓰러져있다. 턴 스킵." % current_character.character_name)
-			next_turn()  # 재귀로 다음 턴
+			next_turn()
 			return
+		
+		# HUD 업데이트 
+		var battle_hud = get_tree().get_first_node_in_group("battle_hud")
+		if battle_hud:
+			battle_hud.highlight_current_turn(current_character)
 		
 		# 턴 시작
 		turn_started.emit(current_character)
